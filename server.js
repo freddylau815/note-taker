@@ -6,6 +6,8 @@ const app = express()
 const PORT = 3334
 
 app.use(express.static('./public'))
+// NEED JSON READER WHEN REQUESTING JSON
+app.use(express.json())
 
 // Load Routes
 app.use('/', note_routes)

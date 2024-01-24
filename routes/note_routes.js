@@ -31,7 +31,7 @@ router.post('/api/notes', async (requestObj, responseObj) => {
 
     const noteData = requestObj.body
     console.log(requestObj.body)
-    // if (!notes.find(note = note.title === noteData.title) && noteDtata.title) {}
+    // if (!notes.find(note = note.title === noteData.title) && noteData.title) {}
     if (noteData.title) {
         notes.push(noteData)
 
