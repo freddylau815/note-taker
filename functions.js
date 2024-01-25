@@ -3,7 +3,7 @@ const fs = require('fs')
 // Get notes data from JSON
 async function getNotes() {
     const notes = await fs.promises.readFile('./db/db.json', 'utf8');
-    console.log('hello', notes)
+    console.log('functions line 6', notes)
     return JSON.parse(notes)
 }
 
@@ -13,6 +13,6 @@ async function saveNotes(userNotes) {
 }
 
 module.exports = { 
-    getNotes: getNotes,
-    saveNotes: saveNotes
+    getNotes,
+    saveNotes
 }

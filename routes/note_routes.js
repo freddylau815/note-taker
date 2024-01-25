@@ -2,6 +2,7 @@ const router = require('express').Router()
 const { response } = require('express')
 const path = require('path')
 const { getNotes, saveNotes } = require('../functions.js')
+const { v4: uuidv4 } = require('uuid');
 
 // Create route: GET / should return index
 router.get('/', (requestObj, responseObj) => {
@@ -30,7 +31,9 @@ router.post('/api/notes', async (requestObj, responseObj) => {
     const notes = await getNotes();
 
     const noteData = requestObj.body
-    console.log(requestObj.body)
+
+    noteData.id = uuidv4()
+    // console.log(requestObj.body)
     // if (!notes.find(note = note.title === noteData.title) && noteData.title) {}
     if (noteData.title) {
         notes.push(noteData)
@@ -43,6 +46,21 @@ router.post('/api/notes', async (requestObj, responseObj) => {
     }
 })
 
+// Create Route: DELETE /api/notes/:id should receive a query parameter that contains the id of a note to delete
+router.delete('/api/notes/:id', async (requestObj, responseObj) => {
+    const notes = await getNotes()
+    const notesID = requestObj.params.id
+    
+    const filtered = notes.filter(notesObj => 
+        notesObj.id !== notesID)
+
+    await saveNotes(filtered)
+
+    responseObj.send({
+        message: 'Note Deleted!'
+    })
+})
+
 
 //Wildcard Route: GET * should return the index.html file
 router.get('*', (requestObj, responseObj) => {
@@ -50,3 +68,4 @@ router.get('*', (requestObj, responseObj) => {
 })
 
 module.exports = router;
+
