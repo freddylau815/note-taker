@@ -13,8 +13,6 @@ router.get('/', (requestObj, responseObj) => {
 // Create route: GET /notes should return the notes.html file
 router.get('/notes', (requestOb, responseObj,) => {
     responseObj.sendFile(path.join(__dirname, '../public/notes.html'))
-    // const notes = getNotes()
-
 }
 )
 
@@ -33,8 +31,7 @@ router.post('/api/notes', async (requestObj, responseObj) => {
     const noteData = requestObj.body
 
     noteData.id = uuidv4()
-    // console.log(requestObj.body)
-    // if (!notes.find(note = note.title === noteData.title) && noteData.title) {}
+ 
     if (noteData.title) {
         notes.push(noteData)
 
